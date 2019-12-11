@@ -8,7 +8,7 @@ public class CharacterFactory {
     private CharacterFactory() {
     }
 
-    public Unicode getChar(Character character){
+    public Unicode saveChar(Character character){
         if(!characterUnicodeMap.containsKey(character)) {
             characterUnicodeMap.put(character,  new Unicode(character));
         }

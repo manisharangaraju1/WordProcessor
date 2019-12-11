@@ -8,4 +8,5 @@ public class NonFlyweightUnicode {
         this.character = character;
         this.font = font;
     }
+
 }

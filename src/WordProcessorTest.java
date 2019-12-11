@@ -7,18 +7,20 @@ import java.util.List;
 import static junit.framework.TestCase.assertTrue;
 
 class WordProcessorTest {
-
     @Test
     public void parseTextTest() {
         double memory = new SizeofUtil(){
             @Override
             protected int create() {
-                WordProcessor wordProcessor = new WordProcessor(CharacterFactory.getTextCharacterFactoryInstance());
+                WordProcessor wordProcessor = new WordProcessor();
                 RunArray runArray = new RunArray();
-                Font fontOne = FontFactory.getFontFactoryInstance().getFont("TIMES NEW ROMAN", Font.ITALIC, 10);
-                runArray.addRun(0, 3, fontOne);
-                runArray.appendRun(11, fontOne);
-                wordProcessor.parseText("ABC ABCDABCABC", runArray);
+                FontFactory aFontFactory = FontFactory.getFontFactoryInstance();
+
+                Font fontOne = aFontFactory.getFont("TIMES NEW ROMAN",Font.ITALIC,10);
+                RunArray aRun = new RunArray();
+                aRun.addRun(0,14,fontOne);
+                wordProcessor.parseText("ABCdvf ABCDABC", runArray);
+
                 return 1;
             }
         }.averageBytes();
@@ -26,18 +28,28 @@ class WordProcessorTest {
         double memoryWithoutFlyweight = new SizeofUtil(){
             @Override
             protected int create() {
-                List<NonFlyweightUnicode> characterArray = new ArrayList<>();
-                String text = "ABC ABCDABCABC";
-                for (char c : text.toCharArray()) {
-                    Font fontOne = FontFactory.getFontFactoryInstance().getFont("TIMES NEW ROMAN", Font.ITALIC, 10);
-                    characterArray.add(new NonFlyweightUnicode(c, fontOne));
-                }
+                WordProcessor wordProcessor = new WordProcessor();
+                String testNonFlyweightString = "ABCdvf ABCDABC";
+                List<Font> fonts = new ArrayList<>();
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+                fonts.add(new Font("TIMES NEW ROMAN", Font.ITALIC, 10));
+
+                wordProcessor.parseNonFlyweightText(testNonFlyweightString, fonts);
                 return 1;
             }
         }.averageBytes();
-
-        assertTrue(memoryWithoutFlyweight < memory);
+        assertTrue(memoryWithoutFlyweight > memory);
     }
-
-
 }

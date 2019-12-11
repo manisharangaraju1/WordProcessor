@@ -9,10 +9,10 @@ class CharacterFactoryTest {
     void getChar() {
         String testCharacterFactoryString = "ABC ABCD";
         for (char c : testCharacterFactoryString.toCharArray()) {
-            characterFactory.getChar(c);
+            characterFactory.saveChar(c);
         }
-        assertTrue(characterFactory.getChar(testCharacterFactoryString.charAt(0)) ==
-                characterFactory.getChar(testCharacterFactoryString.charAt(4)));
+        assertTrue(characterFactory.saveChar(testCharacterFactoryString.charAt(0)) ==
+                characterFactory.saveChar(testCharacterFactoryString.charAt(4)));
     }
 
     @Test

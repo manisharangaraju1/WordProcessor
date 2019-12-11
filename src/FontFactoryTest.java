@@ -9,8 +9,8 @@ class FontFactoryTest {
 
     @Test
     void getFont() {
-        Font font = fontFactory.getFont("TIMES NEW ROMAN", Font.ITALIC, 10);
-        Font fontTest = fontFactory.getFont("TIMES NEW ROMAN", Font.ITALIC, 10);
+        Font font = fontFactory.getFont("TIMES NEW ROMAN" , Font.ITALIC , 10);
+        Font fontTest = fontFactory.getFont("TIMES NEW ROMAN" , Font.ITALIC , 10);
         assertTrue(font == fontTest);
     }
 

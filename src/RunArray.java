@@ -10,7 +10,7 @@ public class RunArray {
 
     public void addRun(int startIndex, int runLength, Font font) {
         Run newRun = new Run(startIndex, startIndex+ runLength, font);
-            runs.add(newRun);
+        runs.add(newRun);
     }
 
     public void appendRun(int runLength, Font font) {
